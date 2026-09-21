@@ -11,15 +11,24 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
 
     try {
-      await fetch("https://formsubmit.co/ajax/730789dbf6abd81ca34d68f1f674354c", {
+      // FormSubmit REQUIRES this string instead of the raw email.
+      // Do NOT change this back to thatchina.dev@gmail.com, or it will stop working!
+      const response = await fetch("https://formsubmit.co/ajax/730789dbf6abd81ca34d68f1f674354c", {
         method: "POST",
         headers: {
+          "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: formData,
+        body: JSON.stringify(data),
       });
+      
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      
       setStatus("sent");
       e.target.reset();
 
