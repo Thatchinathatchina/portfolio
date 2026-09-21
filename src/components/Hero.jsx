@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Download } from "lucide-react";
 import { profile } from "../data/profile";
-import heroImage from "../assets/Thatchina.PNG";
+import heroImage from "../assets/Thatchina.png";
 
 const badges = ["Laravel", "React", "React Native", "Python", "PostgreSQL"];
 
