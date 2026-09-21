@@ -11,15 +11,18 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     const formData = new FormData(e.target);
-    
+
     try {
-      await fetch("https://formsubmit.co/ajax/thatchina.dev@gmail.com", {
+      await fetch("https://formsubmit.co/ajax/730789dbf6abd81ca34d68f1f674354c", {
         method: "POST",
+        headers: {
+          "Accept": "application/json"
+        },
         body: formData,
       });
       setStatus("sent");
       e.target.reset();
-      
+
       // Reset the button after a few seconds
       setTimeout(() => setStatus("idle"), 5000);
     } catch (err) {
@@ -74,7 +77,7 @@ export default function Contact() {
           {/* FormSubmit Configuration */}
           <input type="hidden" name="_subject" value="New Portfolio Message!" />
           <input type="hidden" name="_template" value="box" />
-          
+
           <div className="grid sm:grid-cols-2 gap-4">
             <Field label="Name" name="name" type="text" required />
             <Field label="Email" name="email" type="email" required />
@@ -100,7 +103,7 @@ export default function Contact() {
             <Send size={16} />
             {status === "sending" ? "Sending..." : status === "sent" ? "Message Sent!" : "Send Message"}
           </button>
-          
+
           {status === "sent" && (
             <p className="mt-3 text-sm text-green-400">
               Message sent successfully! I will get back to you soon.
